@@ -221,3 +221,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# API keys and credentials
+.env
+.env.*
+!.env.example
+
+# Vector databases
+chroma_db/
+
+# Local model caches
+.cache/
