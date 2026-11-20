@@ -1,46 +1,32 @@
-
-import json
+import sys
 from pathlib import Path
 
-# 1. Chemin principal du projet
-ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data"
+# Permet d'importer le package src/gastroagent
+sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
-# 2. Fichiers JSON à examiner
-files = [
-    "raw/restaurants_checkpoint.json",
-    "raw/Recipes.json",
-    "raw/Synthetic-User-Reviews.json",
-    "processed/structured_restaurant_data.json",
-    "processed/augmented_food_recipe.json",
-    "processed/augmented_user_review.json",
-]
+from gastroagent.data_loader import (
+    load_augmented_recipes,
+    load_augmented_reviews,
+)
+from gastroagent.config import IMAGES_DIR
 
-# 3. Examiner chaque fichier
-for filename in files:
-    path = DATA / filename
-    print(f"\n--- {filename} ---")
-
-    if not path.exists():
-        print("Fichier introuvable")
-        continue
-
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
-
+def inspect_list(name, data):
+    print(f"--- {name} ---")
     print("Type :", type(data).__name__)
     print("Nombre d'éléments :", len(data))
+    if isinstance(data, list) and len(data) > 0 and isinstance(data[0], dict):
+        print("Champs :", list(data[0].keys()))
+    print()
 
-    # Afficher les clés du premier enregistrement
-    if isinstance(data, list) and data:
-        first = data[0]
+def main():
+    recipes = load_augmented_recipes()
+    reviews = load_augmented_reviews()
+    images = list(IMAGES_DIR.glob("*.png"))
 
-        if isinstance(first, str):
-            first = json.loads(first)
+    inspect_list("processed/augmented_food_recipe.json", recipes)
+    inspect_list("processed/augmented_user_review.json", reviews)
 
-        if isinstance(first, dict):
-            print("Champs :", list(first.keys()))
+    print("Nombre d'images :", len(images))
 
-# 4. Vérifier les images
-images = list((DATA / "images").rglob("recipe*.png"))
-print("\nNombre d'images :", len(images))
+if __name__ == "__main__":
+    main()
