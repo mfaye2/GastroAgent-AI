@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel, Field, ConfigDict
-
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 
 class RecipeSchema(BaseModel):
 
@@ -46,7 +46,14 @@ class RestaurantSchema(BaseModel):
     location: str = Field(min_length=1)
 
     type: str = Field(min_length=1)
-    food_style: str = Field(min_length=1)
+    food_style: str | None = None
+
+    @field_validator("food_style", mode="before")
+    @classmethod
+    def normalize_food_style(cls, value):
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
 
     rating: float | None = Field(
         default=None, ge=0, le=5
