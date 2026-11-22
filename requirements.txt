@@ -1,2 +1,5 @@
 pydantic>=2.0
 python-dotenv>=1.0
+langchain-core>=1.0,<2.0
+sentence-transformers>=5.0
+chromadb>=1.1.13,<2.0

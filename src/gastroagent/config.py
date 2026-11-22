@@ -18,3 +18,5 @@ RAW_REVIEWS_FILE = RAW_DIR / "Synthetic-User-Reviews.json"
 STRUCTURED_RESTAURANTS_FILE = PROCESSED_DIR / "structured_restaurant_data.json"
 AUGMENTED_RECIPES_FILE = PROCESSED_DIR / "augmented_food_recipe.json"
 AUGMENTED_REVIEWS_FILE = PROCESSED_DIR / "augmented_user_review.json"
+# Dossier de stockage de la base vectorielle
+CHROMA_DIR = PROJECT_ROOT / "chroma_db"
