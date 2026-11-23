@@ -75,10 +75,14 @@ def detect_food(question: str) -> list[str]:
     return []
 
 
-def search_all_collections(question: str, top_k: int = 3):
+def search_all_collections( question: str,top_k: int = 3,collections: list[str] | None = None):
 
     # 1. Détecter les collections et le plat recherché
-    collection_names = select_collections(question)
+    collection_names = (
+    collections
+    if collections is not None
+    else select_collections(question)
+    )
     food_words = detect_food(question)
 
     # 2. Ouvrir ChromaDB
