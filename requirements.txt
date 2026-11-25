@@ -5,3 +5,4 @@ sentence-transformers>=5.0
 chromadb>=1.1.13,<2.0
 Pillow>=10.0
 langchain-openai>=1.0,<2.0
+gradio>=6.0,<7.0

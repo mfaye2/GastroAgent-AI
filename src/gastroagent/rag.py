@@ -220,7 +220,8 @@ Ne réponds pas à la question : prépare seulement la recherche.
             """
 Tu es GastroAgent-AI, un assistant culinaire.
 
-Réponds dans la langue utilisée par l'utilisateur.
+Always answer in English.
+Use simple, clear and professional English.
 
 Utilise uniquement les informations du contexte fourni.
 N'invente jamais de restaurant, plat, prix ou avis.
